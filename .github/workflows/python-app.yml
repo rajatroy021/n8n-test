@@ -21,10 +21,12 @@ jobs:
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-    - name: Run all Python files in feature1/
+    - name: Run all Python files in root and feature1/
       run: |
-        echo "Running all Python scripts in feature1/"
-        for file in feature1/*.py; do
-          echo "Running $file"
-          python "$file"
+        echo "Running Python scripts in root and feature1/"
+        for file in ./*.py feature1/*.py; do
+          if [ -f "$file" ]; then
+            echo "Running $file"
+            python "$file"
+          fi
         done
